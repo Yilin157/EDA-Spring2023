@@ -94,12 +94,12 @@ status1<-function(x){
   }
 }
 
-#report1<-status1(exam.df$exam_score);report1 
+#report1<-status1(score);report1 
 
 status2<-function(x) {
   ifelse(x>=50,TRUE,FALSE)
 }
-report2<-status2(exam.df$exam_score);report2
+report2<-status2(score);report2
 
 
 ```
