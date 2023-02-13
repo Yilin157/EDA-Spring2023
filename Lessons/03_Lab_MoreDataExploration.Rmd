@@ -94,25 +94,34 @@ Question: In the R chunk below, write "dataframe1\$". Press `tab` after you type
 Find a ten-day forecast of temperatures (Fahrenheit) for Durham, North Carolina. Create two vectors, one representing the high temperature on each of the ten days and one representing the low.
 
 ```{r DataExercise-1a}
-
+high_t<-c(64,71,72,63,51,52,61,64,67,73)
+low_t<-c(42,49,60,46,32,32,41,47,52,54)
 ```
 
 Now, create two additional vectors that include the ten-day forecast for the high and low temperatures in Celsius. Use a function to create the two new vectors from your existing ones in Fahrenheit.
 
 ```{r DataExercise-1b}
+conversion<-function(x){
+  cel<-round((x-32)*(5/9),2)
+  return(cel)
+}
 
+celcius_ht<-conversion(high_t)
+celcius_lt<-conversion(low_t)
 ```
 
 Combine your four vectors into a data frame and add informative column names.
 
 ```{r DataExercise-1c}
-
+high_t.df<-as.data.frame(high_t)
+temperature<- cbind(high_t.df,low_t,celcius_ht,celcius_lt)
+formal_temperature<-data.frame("highest_temperature_fahrenheit"=high_t,"lowest_temperature_fahrenheit" = low_t, "highest_temperature_celcius"=celcius_ht, "lowest_temperature_celcius"=celcius_lt)
 ```
 
 Use the common functions `summary` and `sd` to obtain basic data summaries of the ten-day forecast. How would you call these functions differently for the entire data frame vs. a single column? Attempt to demonstrate both options below.
 
 ```{r DataExercise-1d}
-
+summary(formal_temperature)
 ```
 
 ### Date objects
@@ -159,15 +168,17 @@ date_obj_today
 #Ex_3 - on your own...
 str_juneteenth <- "19 June 1865"
 #Since the format is month-day-year we will use function mdy()
-#date_juneteenth <- ()
-#date_juneteenth
+date_juneteenth <- mdy(str_juneteenth)
+date_juneteenth
 ```
 
 ```{r DateExercise2}
 #century issue
-str_past <- "55-feb-3"
+str_past <- "15-feb-3"
 date_obj_past <- ymd(str_past)
 date_obj_past
+
+ifelse(year(date_obj_past)%% 100 >23, year(date_obj_past)-100, year(date_obj_past))
 
 #Build a function to fix year that is more general than the one discussed in the lesson
 fix.early.dates <- function(d, cutoff) {
