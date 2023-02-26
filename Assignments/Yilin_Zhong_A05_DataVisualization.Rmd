@@ -114,7 +114,7 @@ box_temp <-
   labs(x = "Month",
        y = "Temperature (C)",
        title = "Temperature Boxplot by month")+
-  theme(legend.position = "top",
+  theme(legend.position = "none",
         axis.title.y = element_text(size = 15),
         axis.title.x = element_text(size = 15))
 
@@ -136,11 +136,11 @@ box_TN <-
   labs(x = "Month",
        y = "Concentration (ug)",
        title = "TN Boxplot by month")+
-  theme(legend.position = "none",
+  theme(legend.position = "bottom",
         axis.title.y = element_text(size = 15),
         axis.title.x = element_text(size = 15))
 
-plot_grid(box_temp, box_TN, box_TP,nrow = 3, align = 'hv', axis = "bt")
+plot_grid(box_temp, box_TP, box_TN,nrow = 3, align = 'hv', axis = "bt")
 
 
 ```
