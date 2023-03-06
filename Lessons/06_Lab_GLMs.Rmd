@@ -48,7 +48,14 @@ Create three plots, each with appropriately formatted axes and legends. Choose a
 
 ```{r}
 #Exercise 1:
+  ggplot(EPAair, aes(x = Ozone, fill=as.factor(Year))) +
+  geom_density(alpha = 0.5) +
+  scale_fill_manual(values = c("blue","purple"))+
+  labs(fill="", x= "Ozone AQI Values", y="Density")
 
+ggplot(EPAair, aes(x=as.factor(Year), y=Ozone))+
+         geom_boxplot()+
+         stat_summary(geom = "text", fun=max, vjust = -1, size=4, label=c("a","b"))
 
 ```
 
@@ -61,10 +68,15 @@ For the NTL-LTER dataset, can we predict PM2.5 from Ozone?
 ```{r}
 
 #Exercise 2: Run a linear regression PM2.5 by Ozone. Find the p-value and R-squared value. 
-
+LRM<-lm(data= EPAair, PM2.5~ Ozone)
+summary(LRM)
 
 
 #Exercise 3: Build a scatterplot. Add a line and standard error for the linear regression. Add the regression equation to the plot
+ggplot(EPAair, aes(x=Ozone, y=PM2.5))+
+  geom_point()+
+  geom_smooth(method = "lm", color="yellow", se=FALSE)
+  
 
 
 
@@ -78,7 +90,13 @@ What other variables can we add to improve model?
 ```{r}
 
 #Exercise 4: Build correlation plots and identify more possible explanatory variables to add to the regression.
-
+library(corrplot)
+EPAair.subset<-EPAair %>% 
+  select(mean_Lat:Ozone) %>% 
+  drop_na()
+EPA.corr<-cor(EPAair.subset)
+corrplot(EPA.corr, method = "ellipse")
+corrplot.mixed(EPA.corr, upper = "ellipse")
 
 
 
