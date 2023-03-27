@@ -82,6 +82,7 @@ ozone.2019<-read.csv("./Data/Raw/Ozone_TimeSeries/EPAair_O3_GaringerNC2019_raw.c
 
 GaringerOzone<-rbind(ozone.2010,ozone.2011,ozone.2012,ozone.2013,ozone.2014,
                      ozone.2015,ozone.2016,ozone.2017,ozone.2018,ozone.2019)
+dim(GaringerOzone)
 ```
 
 ## Wrangle
@@ -108,6 +109,7 @@ Days<-as.data.frame(seq(as.Date("2010-01-01"),as.Date("2019-12-31"),by = 1))
 colnames(Days)<-c("Date")
 #6
 GaringerOzone<-left_join(Days,GaringerOzone.wrangled)
+dim(GaringerOzone)
 ```
 
 ## Visualize
