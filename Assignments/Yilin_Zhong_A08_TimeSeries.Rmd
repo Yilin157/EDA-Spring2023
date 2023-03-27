@@ -152,7 +152,8 @@ GaringerOzone.monthly<-GaringerOzone %>%
   group_by(month, year) %>% 
   summarize(monthly.mean.ozone = mean(Daily.Max.8.hour.Ozone.Concentration))
 
-GaringerOzone.monthly$Date <- as.yearmon(paste(GaringerOzone.monthly$year, GaringerOzone.monthly$month), "%Y %m")
+GaringerOzone.monthly$Date <- as.yearmon(paste(GaringerOzone.monthly$year, 
+                                               GaringerOzone.monthly$month), "%Y %m")
 GaringerOzone.monthly$Date <-as.Date(GaringerOzone.monthly$Date,format = "%m %Y")
 class(GaringerOzone.monthly$Date)
 ```
