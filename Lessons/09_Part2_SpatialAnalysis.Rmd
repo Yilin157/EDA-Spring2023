@@ -42,7 +42,6 @@ The typical set up procedure: confirm the working directory and import libraries
 ```{r setup}
 #Examine the working directory
 getwd()
-
 #Import libraries
 library(tidyverse)
 library(lubridate)
@@ -82,6 +81,7 @@ ggplot(data=epa_pm25_sites_sf) +
 
 The `sf` package allows us to read many existing data formats, including ArcGIS shapefiles. I've added a few shapefiles to our Data folder: one of all US counties and another of 8-digit hydrologic Unit codes (HUCs) for NC. Here we explore how they are read into R as spatial features.
 
+
 ### 2.2.1 Read in and explore NC counties
 
 Below we read in the USA counties shapefile, filtering for just the NC features (NC has a state FIPS code of "37"...). We also see that `sf` plays nice with "tidyverse" syntax (e.g. pipes) and functions (e.g. filter). The `sf` package also includes some new spatial methods for exploring our data (e.g. `st_bbox` which draws a bounding box around all spatial features).
@@ -117,18 +117,19 @@ mapView(counties_sf, zcol = "AWATER")
 
 ```{r read HUCs shapefile}
 #Read the shapefile into an sf dataframe named "huc8_sf"
-
+huc8_sf<- st_read('./Data/Spatial/NCHUC8.shp')
 
 #Reveal the columns
-
+colnames(huc8_sf)
 
 #Check the CRS
-
+st_crs(huc8_sf)
 
 #Examine some records
 head(huc8_sf)
 
 #View the data as a map, colored by the acreage in each
+mapView(huc8_sf, zcol = "ACRES")
 
 
 
